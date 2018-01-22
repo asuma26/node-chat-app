@@ -26,7 +26,7 @@ socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined'))
     //   text:msg.text,
     //   createAt:new Date().getTime()
     // });
-    io.emit('newMessage', generateMessage(message.from, message.text));
+    io.emit('newMessage', generateMessage(msg.from, msg.text));
 });
 
   socket.on('disconnect',()=>{

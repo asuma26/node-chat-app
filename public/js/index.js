@@ -12,11 +12,29 @@ socket.on('connect',function(){
 //});
 
 });
+
+
 socket.on('disconnect',function(){
   console.log('Disconnected from server');
 });
 
 
-socket.on('newMessage',(msg)=>{
-  console.log('new message',msg);
+socket.on('newMessage',(message)=>{
+  console.log('new message',message);
+
+  var li = jQuery('<li></li>');
+  li.text(`${message.from}: ${message.text}`);
+
+  jQuery('#messages').append(li);
+});
+
+jQuery('#message-form').on('submit',function (e){
+  e.preventDefault();// overriding default behaviour
+
+  socket.emit('createMessage',{
+    from:'User',
+    text:jQuery('[name=message]').val()//it takes the text in message box;
+  },function (){
+
+  });
 });
